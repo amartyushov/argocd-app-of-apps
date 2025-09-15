@@ -3,10 +3,45 @@
 Explanation of the approach for this repo can be
 found [HERE](https://argo-cd.readthedocs.io/en/latest/operator-manual/cluster-bootstrapping/)
 
+## Start K8s
 One of the ways to start k8s locally
-`colima start --cpu 6 --memory 8 --disk 100 --mount $HOME:w --kubernetes`
+```
+colima start --cpu 6 --memory 8 --disk 100 --mount $HOME:w --kubernetes
+```
 
+## Install ArgoCD
+* Check available namespaces `kubectl get namespaces`
+* If ArgoCD namespace is absent then create it `kubectl create namespace argocd`
+* Install ArgoCD to the cluster `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
+* Check ArgoCD is installed `kubectl get pods -n argocd`
+
+Cleanup ArgoCD setup 
+`kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
+
+## Access ArgoCD
+For now as a shortcut just forward ports of the server
+```
+kubectl port-forward svc/argocd-server -n argocd 8081:https
+```
+
+Login to Argo-CD
+```
+argocd login localhost:8081 \
+--username admin \
+--password $(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo) \
+--insecure
+```
 In order to add a new app to ArgoCD insert an entry to apps/values.yaml file
+
+How to start ArgoCD
+```
+argocd app create apps \
+    --dest-namespace argocd \
+    --dest-server https://kubernetes.default.svc \
+    --repo https://github.com/amartyushov/argocd-app-of-apps.git \
+    --path apps  
+argocd app sync apps  
+```
 
 # ArgoCD Example Apps
 
