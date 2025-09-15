@@ -1,3 +1,13 @@
+# How to
+
+Explanation of the approach for this repo can be
+found [HERE](https://argo-cd.readthedocs.io/en/latest/operator-manual/cluster-bootstrapping/)
+
+One of the ways to start k8s locally
+`colima start --cpu 6 --memory 8 --disk 100 --mount $HOME:w --kubernetes`
+
+In order to add a new app to ArgoCD insert an entry to apps/values.yaml file
+
 # ArgoCD Example Apps
 
 This repository contains example applications for demoing ArgoCD functionality. Feel free
