@@ -30,11 +30,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /check/ttt
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /check/ttt
               port: http
           resources:
   {{ toYaml .Values.resources | indent 12 }}
