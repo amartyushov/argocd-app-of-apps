@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "template-kotlin-service.fullname" . }}
+  name: {{ template "template-kotlin-service.name" . }}
   labels:
     app: {{ template "template-kotlin-service.name" . }}
     chart: {{ template "template-kotlin-service.chart" . }}
