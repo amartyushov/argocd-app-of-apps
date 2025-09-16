@@ -15,11 +15,11 @@ colima start --cpu 6 --memory 8 --disk 100 --mount $HOME:w --kubernetes
 * Install ArgoCD to the cluster `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
 * Check ArgoCD is installed `kubectl get pods -n argocd`
 
-Cleanup ArgoCD setup 
+(Note) Cleanup ArgoCD setup 
 `kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
 
 ## Access ArgoCD
-For now as a shortcut just forward ports of the server
+For now as a shortcut just forward ports of the server to be able to reach UI
 ```
 kubectl port-forward svc/argocd-server -n argocd 8081:https
 ```
@@ -49,6 +49,13 @@ Root app in this example has quite some scripting in its helm chart template in 
 cd to_apps_folder
 helm template . --values values.yaml
 ```
+
+## [template-kotlin-service](template-kotlin-service)
+As configured now Service has type NodePort, then once app is synced and healthy then you can test it, e.g.
+```
+curl http://localhost:31591/check/bla
+```
+assuming that you have a local k8s cluster
 
 # ArgoCD Example Apps
 

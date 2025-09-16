@@ -12,7 +12,7 @@ applications:
 #    tool:
 #      helm:
 #        releaseName: blue-green
-  - name: guestbook
+#  - name: guestbook
 #  - name: helm-dependency
 #    tool:
 #      helm:
