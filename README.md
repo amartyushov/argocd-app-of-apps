@@ -43,6 +43,13 @@ argocd app create apps \
 argocd app sync apps  
 ```
 
+## Verify
+Root app in this example has quite some scripting in its helm chart template in order to render it locally execute the following
+```
+cd to_apps_folder
+helm template . --values values.yaml
+```
+
 # ArgoCD Example Apps
 
 This repository contains example applications for demoing ArgoCD functionality. Feel free
