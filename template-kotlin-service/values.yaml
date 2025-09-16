@@ -5,7 +5,7 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-containerPort: 8989
+containerPort: 9898
 
 service:
   type: NodePort
